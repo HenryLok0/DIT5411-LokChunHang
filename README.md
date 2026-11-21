@@ -80,11 +80,11 @@ Full 13,065-class run, no `--max-classes`. The test set has 162,797 images and w
 
 | Model | Test top-1 | Top-5 |
 | --- | --- | --- |
-| shallow_cnn | 0.0001 | 0.0003 |
-| deep_cnn | 0.0729 | 0.1472 |
+| shallow_cnn | 0.01% | 0.03% |
+| deep_cnn | 7.29% | 14.72% |
 | residual_cnn | not evaluated | not evaluated |
 
-Best model among finished tests: `deep_cnn` (top-1 0.0729, top-5 0.1472).
+Best model among finished tests: `deep_cnn` (top-1 7.29%, top-5 14.72%).
 
 `residual_cnn` stopped at step 20348/20418 of epoch 5, before the test set was scored, so it has no recognition rate and is not used to choose the best model.
 

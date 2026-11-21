@@ -87,16 +87,16 @@ def save_comparison_chart(results: list, out_path: Path) -> None:
     import numpy as np
 
     names = [row["model"] for row in results]
-    top1 = [row["accuracy"] for row in results]
-    top5 = [row["top5"] for row in results]
+    top1 = [row["accuracy"] * 100 for row in results]
+    top5 = [row["top5"] * 100 for row in results]
     positions = np.arange(len(names))
     width = 0.36
     figure, axis = plt.subplots(figsize=(8, 4.5))
     axis.bar(positions - width / 2, top1, width, label="Top-1")
     axis.bar(positions + width / 2, top5, width, label="Top-5")
     axis.set_xticks(positions, names)
-    axis.set_ylim(0, 1)
-    axis.set_ylabel("Test accuracy")
+    axis.set_ylim(0, 100)
+    axis.set_ylabel("Test accuracy (%)")
     axis.set_title("Test recognition rate")
     axis.legend()
     figure.tight_layout()
@@ -127,7 +127,7 @@ def write_report(results: list, meta: dict, out_path: Path, best_name: str) -> N
     for row in results:
         lines.append(
             f"| {row['model']} | {row['description']} | {row['params']} | {row['loss']:.4f} | "
-            f"{row['accuracy']:.4f} | {row['top5']:.4f} |"
+            f"{row['accuracy'] * 100:.2f}% | {row['top5'] * 100:.2f}% |"
         )
     lines.extend(["", f"Best model: `{best_name}`", ""])
     out_path.write_text("\n".join(lines), encoding="utf-8")
@@ -269,7 +269,7 @@ def main() -> int:
             "top5": float(metrics["top5"]),
         }
         results.append(row)
-        print(f"{name} test recognition rate Top-1={row['accuracy']:.4f}  Top-5={row['top5']:.4f}")
+        print(f"{name} test recognition rate Top-1={row['accuracy'] * 100:.2f}%  Top-5={row['top5'] * 100:.2f}%")
         if csv_path.exists():
             save_history_plot(csv_path, result_dir / f"history_{name}.png")
 
@@ -288,7 +288,7 @@ def main() -> int:
     )
     write_report(results, meta, result_dir / "comparison.md", best["model"])
     save_comparison_chart(results, result_dir / "comparison.png")
-    print(f"\nBest model: {best['model']}, test recognition rate {best['accuracy']:.4f}")
+    print(f"\nBest model: {best['model']}, test recognition rate {best['accuracy'] * 100:.2f}%")
     print("Results written to results/comparison.md")
     return 0
 

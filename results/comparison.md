@@ -11,8 +11,8 @@ Full 13,065-class test results.
 
 | Model | Architecture | Parameters | Test loss | Recognition rate Top-1 | Top-5 |
 | --- | --- | ---: | ---: | ---: | ---: |
-| shallow_cnn | Conv32 x2, pool, Conv64 x2, pool, Dense256, softmax | 7617257 | 9.6329 | 0.0001 | 0.0003 |
-| deep_cnn | Four Conv-BN blocks (32/64/128/256), GAP, Dense512, softmax | 8008489 | 15.0850 | 0.0729 | 0.1472 |
+| shallow_cnn | Conv32 x2, pool, Conv64 x2, pool, Dense256, softmax | 7617257 | 9.6329 | 0.01% | 0.03% |
+| deep_cnn | Four Conv-BN blocks (32/64/128/256), GAP, Dense512, softmax | 8008489 | 15.0850 | 7.29% | 14.72% |
 
 Best model: `deep_cnn`
 
